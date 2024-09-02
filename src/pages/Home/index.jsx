@@ -1,9 +1,9 @@
-// src/pages/Home/index.jsx
 import React from 'react';
 import ResumoDespesas from '../../components/ResumoDespesas';
 import AcessoRapido from '../../components/AcessoRapido';
 import Notificacoes from '../../components/Notificacoes';
 import { useNavigate } from 'react-router-dom';
+import { Container, Row, Col } from 'reactstrap';
 import './style.css';
 
 const Home = () => {
@@ -28,21 +28,31 @@ const Home = () => {
     };
 
     return (
-        <div className="home-container">
-            <h1>Bem-vindo ao Gerenciador Financeiro</h1>
-            <ResumoDespesas 
-                totalGasto={totalGasto} 
-                totalPausado={totalPausado} 
-                totalAtrasado={totalAtrasado} 
-            />
-            <AcessoRapido 
-                onGerenciarDespesas={handleGerenciarDespesas} 
-                onVerHistorico={handleVerHistorico} 
-            />
-            <Notificacoes 
-                mensagem={notificacaoMensagem} 
-            />
-        </div>
+        <Container fluid className="home-container">
+            <Row>
+                <Col xs="2">
+                    <h1>Bem-vindo ao Gerenciador Financeiro</h1>
+                </Col>
+                <Col>
+                    <AcessoRapido
+                        onGerenciarDespesas={handleGerenciarDespesas}
+                        onVerHistorico={handleVerHistorico}
+                    />
+                </Col>
+            </Row>
+            <Row>
+                <Notificacoes
+                    mensagem={notificacaoMensagem}
+                />
+            </Row>
+            <Row>
+                <ResumoDespesas
+                    totalGasto={totalGasto}
+                    totalPausado={totalPausado}
+                    totalAtrasado={totalAtrasado}
+                />
+            </Row>
+        </Container>
     );
 };
 
