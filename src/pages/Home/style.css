@@ -1,0 +1,28 @@
+.home-container {
+    padding: 20px;
+}
+
+.resumo-despesas {
+    margin-bottom: 20px;
+}
+
+.resumo-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.acesso-rapido {
+    margin-bottom: 20px;
+}
+
+.acesso-rapido button {
+    margin-right: 10px;
+}
+
+.notificacoes {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+}
