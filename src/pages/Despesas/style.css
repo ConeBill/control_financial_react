@@ -1,0 +1,17 @@
+h2 {
+    color: #343a40;
+    font-weight: 700;
+}
+
+table {
+    background-color: #fff;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+button {
+    margin-bottom: 10px;
+}

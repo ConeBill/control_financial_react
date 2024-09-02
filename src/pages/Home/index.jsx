@@ -3,9 +3,12 @@ import React from 'react';
 import ResumoDespesas from '../../components/ResumoDespesas';
 import AcessoRapido from '../../components/AcessoRapido';
 import Notificacoes from '../../components/Notificacoes';
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 
 const Home = () => {
+    const navigate = useNavigate();
+
     // Dados para serem passados aos componentes
     const totalGasto = 'R$ 1.521,44';
     const totalPausado = 'R$ 1.390,30';
@@ -16,6 +19,7 @@ const Home = () => {
     const handleGerenciarDespesas = () => {
         // Lógica para redirecionar para a página de gerenciamento de despesas
         console.log('Redirecionando para Gerenciar Despesas...');
+        navigate('/despesas');
     };
 
     const handleVerHistorico = () => {
