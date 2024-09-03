@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import ComboBox from '../ComboBox';
 
 const ModalAdicionarDespesa = ({ isOpen, toggle, onSalvar }) => {
   const [nome, setNome] = useState('');
@@ -9,6 +10,25 @@ const ModalAdicionarDespesa = ({ isOpen, toggle, onSalvar }) => {
   const [pago, setPago] = useState(false);
   const [numeroParcelas, setNumeroParcelas] = useState('');
   const [diaVencimento, setDiaVencimento] = useState('');
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleChange = (e) => {
+    setStatus(e.target.value);
+  };
+
+  const optionsStatus = [
+    { value: '', label: 'Selecione' },
+    { value: 'Em dia', label: 'Em dia' },
+    { value: 'Atrasada', label: 'Atrasada' },
+    { value: 'Pausada', label: 'Pausada' },
+  ];
+
+  const optionsPago = [
+    { value: '', label: 'Selecione' },
+    { value: 'Sim', label: 'Sim' },
+    { value: 'Nao', label: 'Não' },
+  ];
+
 
   const handleSalvar = () => {
     const novaDespesa = {
@@ -48,30 +68,12 @@ const ModalAdicionarDespesa = ({ isOpen, toggle, onSalvar }) => {
             />
           </FormGroup>
           <FormGroup>
-            <Label for="valorPausado">Valor Pausado</Label>
-            <Input
-              type="number"
-              id="valorPausado"
-              value={valorPausado}
-              onChange={(e) => setValorPausado(e.target.value)}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="statusDespesa">Status</Label>
-            <Input
-              type="text"
+            <ComboBox
+              label="Status"
+              options={optionsStatus}
+              name="statusDespesa"
               id="statusDespesa"
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="pagoDespesa">Pago</Label>
-            <Input
-              type="checkbox"
-              id="pagoDespesa"
-              checked={pago}
-              onChange={(e) => setPago(e.target.checked)}
+              onChange={handleChange}
             />
           </FormGroup>
           <FormGroup>
