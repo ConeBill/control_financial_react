@@ -5,11 +5,12 @@ import Notificacoes from '../../components/Notificacoes';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 import './style.css';
+import ResumoContas from '../../components/ResumoContas';
 
 const Home = () => {
     const navigate = useNavigate();
 
-    // Dados para serem passados aos componentes
+    // Dados para serem passados aos componentes temp 
     const totalGasto = 'R$ 1.521,44';
     const totalPausado = 'R$ 1.390,30';
     const totalAtrasado = 'R$ 300,00';
@@ -17,23 +18,22 @@ const Home = () => {
 
     // Funções que serão passadas para o componente AcessoRapido
     const handleGerenciarDespesas = () => {
-        // Lógica para redirecionar para a página de gerenciamento de despesas
         console.log('Redirecionando para Gerenciar Despesas...');
         navigate('/despesas');
     };
 
     const handleVerHistorico = () => {
-        // Lógica para redirecionar para a página de histórico
         console.log('Redirecionando para Ver Histórico...');
     };
 
     return (
         <Container fluid className="home-container">
-            <Row>
-                <Col xs="2">
-                    <h1>Bem-vindo ao Gerenciador Financeiro</h1>
+            <Row lx="12">
+                <Col md="5">
+                    <h1>Gestor de Finanças</h1>
                 </Col>
-                <Col>
+                <Col md="3"></Col>
+                <Col md="4" className='navHome'>
                     <AcessoRapido
                         onGerenciarDespesas={handleGerenciarDespesas}
                         onVerHistorico={handleVerHistorico}
@@ -45,7 +45,14 @@ const Home = () => {
                     mensagem={notificacaoMensagem}
                 />
             </Row>
-            <Row>
+            <Row className='m-3 bg-light p-1 shadow-sm'>
+                <ResumoContas 
+                    totalGasto={totalGasto}
+                    totalPausado={totalPausado}
+                    totalAtrasado={totalAtrasado}
+                />
+            </Row>
+            <Row className='m-3 bg-light p-1 shadow-sm'>
                 <ResumoDespesas
                     totalGasto={totalGasto}
                     totalPausado={totalPausado}

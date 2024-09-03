@@ -1,23 +1,13 @@
 .home-container {
-    margin: 0px;
-}
-
-.resumo-despesas {
-    margin-bottom: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .resumo-item {
     display: flex;
     justify-content: space-between;
-    margin: 10px 0;
-}
-
-.acesso-rapido {
-    margin-bottom: 20px;
-}
-
-.acesso-rapido button {
-    margin-right: 10px;
+    margin: 5px 0;
 }
 
 .notificacoes {
@@ -25,4 +15,10 @@
     color: #721c24;
     padding: 10px;
     border-radius: 5px;
+}
+
+.navHome {
+    display: flex;
+    align-items: center;
+    padding: 0;
 }

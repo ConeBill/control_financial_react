@@ -1,4 +1,3 @@
-// src/components/Notificacoes.jsx
 import React from 'react';
 
 const Notificacoes = ({ mensagem }) => {

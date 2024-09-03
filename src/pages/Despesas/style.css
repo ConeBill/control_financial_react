@@ -1,17 +1,44 @@
-h2 {
-    color: #343a40;
-    font-weight: 700;
+.despesa-header {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    padding: 10px 0;
+    border-bottom: 2px solid #dee2e6;
 }
 
-table {
-    background-color: #fff;
+.despesa-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.table th, .table td {
-    vertical-align: middle;
+.header-col {
     text-align: center;
 }
 
-button {
-    margin-bottom: 10px;
+.despesa-row {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);   
+    align-items: center;
 }
+
+.despesa-row:nth-child(even) {
+    background-color: #f1f3f5;
+}
+
+.despesa-row:hover {
+    background-color: #e9ecef;
+}
+
+.despesa-row .text-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.despesa-row .btn {
+    margin-left: 5px;
+}
+

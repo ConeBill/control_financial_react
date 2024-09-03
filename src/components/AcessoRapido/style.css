@@ -1,0 +1,11 @@
+.acesso-rapido {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0;
+}
+
+.bnt1 {
+    margin-right: 10px;
+}

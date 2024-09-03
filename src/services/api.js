@@ -14,7 +14,24 @@ const api = {
             body: JSON.stringify(updates),
         });
         return response.json();
-    }
+    },
+    adicionarDespesa: async (newDespesa) => {
+        try {
+            const response = await fetch(`${API_URL}/despesas`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newDespesa),
+            });
+    
+            return response;
+        } catch (error) {
+            console.error('Erro ao fazer a requisição:', error);
+            // Aqui você pode exibir uma mensagem de erro para o usuário
+            return;
+        }
+    },
 };
 
 export default api;

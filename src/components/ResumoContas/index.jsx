@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ResumoDespesas = ({ totalGasto, totalPausado, totalAtrasado }) => {
+const ResumoContas = ({ totalGasto, totalPausado, totalAtrasado }) => {
     return (
         <div className="resumo-despesas">
-            <h2>Resumo do Mês</h2>
+            <h2>Contas para pagar</h2>
             <div className="resumo-item">
                 <span>Total Gasto:</span>
                 <strong>{totalGasto}</strong>
@@ -20,4 +20,4 @@ const ResumoDespesas = ({ totalGasto, totalPausado, totalAtrasado }) => {
     );
 };
 
-export default ResumoDespesas;
+export default ResumoContas;

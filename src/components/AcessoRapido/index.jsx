@@ -1,13 +1,22 @@
-// src/components/AcessoRapido.jsx
 import React from 'react';
+import { Container } from 'reactstrap';
+import BotaoPersonalizado from '../BotaoPersonalizado';
+import './style.css';
 
 const AcessoRapido = ({ onGerenciarDespesas, onVerHistorico }) => {
     return (
-        <div className="acesso-rapido">
-            <h2>Acesso Rápido</h2>
-            <button onClick={onGerenciarDespesas}>Gerenciar Despesas</button>
-            <button onClick={onVerHistorico}>Ver Histórico</button>
-        </div>
+        <Container fluid className="acesso-rapido">
+            <BotaoPersonalizado
+                className='bnt1'
+                onClick={onGerenciarDespesas}
+                texto="Gerenciar Despesas"
+            />
+            <BotaoPersonalizado
+                className='bnt2'
+                onClick={onVerHistorico}
+                texto="Ver Histórico"
+            />
+        </Container>
     );
 };
 

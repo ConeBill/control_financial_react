@@ -1,10 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
-import './index.css'
+import { Container } from 'reactstrap'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+  <Container fluid>
+    <StrictMode>
+      <App />
+    </StrictMode>
+  </Container>,
 )

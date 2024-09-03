@@ -1,21 +1,23 @@
 import React from 'react';
-import PausarDespesaButton from '../PausarDespesaButton';
-import VerificarStatusDespesa from '../VerificarStatusDespesa';
+import { Button, Col, Row } from 'reactstrap';
 
-const DespesaItem = ({ despesa, onPausar, onStatusUpdate }) => {
-    return (
-        <div className="despesa-item">
-            <h3>{despesa.nome}</h3>
-            <p>Valor: R${despesa.valor.toFixed(2)}</p>
-            <p>Status: {despesa.status}</p>
-            <p>Pago: {despesa.pago}</p>
-            <p>Número de Parcelas: {despesa.numeroParcelas}</p>
-            <p>Data de Vencimento: {despesa.diaVencimento}</p>
-
-            <PausarDespesaButton despesa={despesa} onPausar={onPausar} />
-            <VerificarStatusDespesa despesa={despesa} onStatusUpdate={onStatusUpdate} />
-        </div>
-    );
+const DespesaItem = ({ despesa, onEditar, onPagar, onPausar }) => {
+  return (
+    <Row className="despesa-row">
+      <Col md='2' className="text-right">
+        <Button color="warning" size="sm" onClick={() => onPausar(despesa.id)}>Pausar</Button>{' '}
+        <Button color="info" size="sm" onClick={() => onEditar(despesa)}>Editar</Button>{' '}
+        <Button color="success" size="sm" onClick={() => onPagar(despesa)}>Pagar</Button>
+      </Col>
+      <Col md='2'>{despesa.nome}</Col>
+      <Col md='2'>{despesa.status}</Col>
+      <Col md='1'>{despesa.valor}</Col>
+      <Col md='1'>{despesa.valorPausado}</Col>
+      <Col md='1'>{despesa.pago}</Col>
+      <Col md='2'>{despesa.numeroParcelas}</Col>
+      <Col md='1'>{despesa.diaVencimento}</Col>
+    </Row>
+  );
 };
 
 export default DespesaItem;
