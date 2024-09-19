@@ -3,18 +3,18 @@ import { Container } from 'reactstrap';
 import BotaoPersonalizado from '../BotaoPersonalizado';
 import './style.css';
 
-const AcessoRapido = ({ onGerenciarDespesas, onVerHistorico }) => {
+const AcessoRapido = ({ onGerenciarDespesas, onTextoBntOne, onVerHistorico, onTextoBntTwo }) => {
     return (
         <Container fluid className="acesso-rapido">
             <BotaoPersonalizado
                 className='bnt1'
                 onClick={onGerenciarDespesas}
-                texto="Gerenciar Despesas"
+                texto={onTextoBntOne}
             />
             <BotaoPersonalizado
                 className='bnt2'
                 onClick={onVerHistorico}
-                texto="Ver Histórico"
+                texto={onTextoBntTwo}
             />
         </Container>
     );
