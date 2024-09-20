@@ -24,18 +24,20 @@ const Cadastros = () => {
                         onGerenciarDespesas={handleClickBntOne}
                         onTextoBntOne={"Painel de contas"}
                         onVerHistorico={handleClickBntTwo}
-                        onTextoBntTwo={"Gerenciador de contas"}
+                        onTextoBntTwo={"Gerenciar Guias"}
                     />
                 </Col>
             </Row>
-            <Row>
-                <Container>
+            <Row lg={10}>
+                <Container fluid className='formularios'>
                     <Row>
+                        <Col>
+                        </Col>
                         <Col>
                             <Form>
                                 <h1>Cadastro</h1>
                                 <Row className="row-cols-lg-auto g-3 align-items-center">
-                                    <Col className='formularios'>
+                                    <Col>
                                         <Label className="visually-hidden" for="Email">
                                             Usuario
                                         </Label>
@@ -63,6 +65,8 @@ const Cadastros = () => {
                                     </Col>
                                 </Row>
                             </Form>
+                        </Col>
+                        <Col>
                         </Col>
                         <Col>
                             <Form>
@@ -96,6 +100,8 @@ const Cadastros = () => {
                                     </Col>
                                 </Row>
                             </Form>
+                        </Col>
+                        <Col>
                         </Col>
                     </Row>
                 </Container>

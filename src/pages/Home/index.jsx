@@ -36,7 +36,9 @@ const Home = () => {
                 <Col md="4" className='navHome'>
                     <AcessoRapido
                         onGerenciarDespesas={handleGerenciarDespesas}
+                        onTextoBntOne={'Gerenciar Guias'}
                         onVerHistorico={handleVerHistorico}
+                        onTextoBntTwo={'Histórico de pagamentos'}
                     />
                 </Col>
             </Row>
