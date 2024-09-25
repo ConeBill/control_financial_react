@@ -1,24 +1,39 @@
-.home-container {
-    min-height: 100vh;
+.container-boas-vindas {
     display: flex;
-    flex-direction: column;
-}
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .logo {
+    max-width: 150px;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
 
-.resumo-item {
-    display: flex;
-    justify-content: space-between;
-    margin: 5px 0;
-}
-
-.notificacoes {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.navHome {
+  .row-centered {
+    height: 100vh;
+    justify-content: center;
     display: flex;
     align-items: center;
-    padding: 0;
 }
+  
+  h1 {
+    color: black;    
+  }
+  
+  p {
+    color: black;
+    margin-top: 10px;
+  }
+  
+  .cadlog {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+    position: fixed;
+    top: 0;
+    right: 1;
+  }
+  

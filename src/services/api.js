@@ -1,6 +1,16 @@
-const API_URL = 'http://localhost:3001';
+const API_URL = 'http://147.79.107.23:3000';
 
 const api = {
+    login: async (Usr, SenhaUsr) => {
+        const response = await fetch(`${API_ULR}/login`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(Usr, SenhaUsr)
+        });
+        return response.json();
+    },
     getDespesas: async () => {
         const response = await fetch(`${API_URL}/despesas`);
         return response.json();

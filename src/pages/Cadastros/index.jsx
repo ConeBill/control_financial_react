@@ -1,11 +1,15 @@
-import React from 'react';
 import AcessoRapido from '../../components/AcessoRapido';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { Container, Row, Col, Form, Label, Input, Button } from 'reactstrap';
 import './style.css';
+import api from '../../services/api';
 
 const Cadastros = () => {
     const navigate = useNavigate();
+
+    const [usr, setUsr] = useState('');
+    const [senhaUsr, setSenhaUsr] = useState('');
 
     const handleClickBntOne = () => {
         navigate('/');
@@ -14,6 +18,14 @@ const Cadastros = () => {
     const handleClickBntTwo = () => {
         navigate('/despesas')
     };
+
+    const handleLogin = () => {
+        //api.login()
+    }
+
+    const handleCadastro = () => {
+        console.log('cadastrndo');
+    }
 
     return (
         <Container fluid>
@@ -59,7 +71,7 @@ const Cadastros = () => {
                                             placeholder="Sua senha aqui"
                                             type="password"
                                         />
-                                        <Button>Cadastrar</Button>
+                                        <Button onClick={handleCadastro} >Cadastrar</Button>
                                     </Col>
                                     <Col>
                                     </Col>
@@ -94,7 +106,7 @@ const Cadastros = () => {
                                             placeholder="Sua senha aqui"
                                             type="password"
                                         />
-                                        <Button>Logar</Button>
+                                        <Button onClick={handleLogin} >Logar</Button>
                                     </Col>
                                     <Col>
                                     </Col>

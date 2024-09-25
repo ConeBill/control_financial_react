@@ -1,68 +1,44 @@
 import React from 'react';
-import ResumoDespesas from '../../components/ResumoDespesas';
+import { Button, Container, Row, Col } from 'reactstrap';
 import AcessoRapido from '../../components/AcessoRapido';
-import Notificacoes from '../../components/Notificacoes';
 import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col } from 'reactstrap';
 import './style.css';
-import ResumoContas from '../../components/ResumoContas';
 
-const Home = () => {
+const BoasVindas = () => {
+
     const navigate = useNavigate();
-
-    // Dados para serem passados aos componentes temp 
-    const totalGasto = 'R$ 1.521,44';
-    const totalPausado = 'R$ 1.390,30';
-    const totalAtrasado = 'R$ 300,00';
-    const notificacaoMensagem = 'Você tem 3 despesas atrasadas.';
-
-    // Funções que serão passadas para o componente AcessoRapido
-    const handleGerenciarDespesas = () => {
-        console.log('Redirecionando para Gerenciar Despesas...');
-        navigate('/despesas');
-    };
-
-    const handleVerHistorico = () => {
-        console.log('Redirecionando para Ver Histórico...');
-    };
+    const handleCadastros = () => {
+        navigate('/cadastros');
+    }
 
     return (
-        <Container fluid className="home-container">
-            <Row lx="12">
-                <Col md="5">
-                    <h1>Gestor de Finanças</h1>
-                </Col>
-                <Col md="3"></Col>
-                <Col md="4" className='navHome'>
-                    <AcessoRapido
-                        onGerenciarDespesas={handleGerenciarDespesas}
-                        onTextoBntOne={'Gerenciar Guias'}
-                        onVerHistorico={handleVerHistorico}
-                        onTextoBntTwo={'Histórico de pagamentos'}
-                    />
-                </Col>
-            </Row>
+        <Container fluid>
             <Row>
-                <Notificacoes
-                    mensagem={notificacaoMensagem}
-                />
+                <Col className="d-flex justify-content-center">
+                    <img src="/img/Logo_Lua.png" alt="Logo" className="logo" />
+                </Col>
+                <Col className="d-flex container-boas-vindas align-items-center" sm={4}> 
+                    <div className="cadlog">
+                        <AcessoRapido
+                        className='acesso'
+                        onGerenciarDespesas={handleCadastros}
+                        onTextoBntOne={'Login'}
+                        onVerHistorico={handleCadastros}
+                        onTextoBntTwo={'Cadastro'}
+                        />
+                    </div>
+                </Col>
             </Row>
-            <Row className='m-3 bg-light p-1 shadow-sm'>
-                <ResumoContas 
-                    totalGasto={totalGasto}
-                    totalPausado={totalPausado}
-                    totalAtrasado={totalAtrasado}
-                />
-            </Row>
-            <Row className='m-3 bg-light p-1 shadow-sm'>
-                <ResumoDespesas
-                    totalGasto={totalGasto}
-                    totalPausado={totalPausado}
-                    totalAtrasado={totalAtrasado}
-                />
+            <Row className="row-centered">
+                <Col md="6" className="text-center">
+                    <h1>Bem-vindo ao seu site <br />de<br />Controle Financeiro</h1>
+                    <p>Faça login ou cadastre-se<br/>
+                           para começar a gerenciar<br/>
+                           suas despesas</p>
+                </Col>
             </Row>
         </Container>
     );
 };
 
-export default Home;
+export default BoasVindas;
