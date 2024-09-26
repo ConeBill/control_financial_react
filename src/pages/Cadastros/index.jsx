@@ -19,9 +19,6 @@ const Cadastros = () => {
         navigate('/despesas')
     };
 
-    const handleLogin = () => {
-        //api.login()
-    }
 
     const handleCadastro = () => {
         console.log('cadastrndo');
@@ -29,95 +26,42 @@ const Cadastros = () => {
 
     return (
         <Container fluid>
-            <Row lx="12">
-                <Col md="8"> </Col>
-                <Col md="4" className='navHome'>
-                    <AcessoRapido
-                        onGerenciarDespesas={handleClickBntOne}
-                        onTextoBntOne={"Painel de contas"}
-                        onVerHistorico={handleClickBntTwo}
-                        onTextoBntTwo={"Gerenciar Guias"}
-                    />
-                </Col>
-            </Row>
-            <Row lg={10}>
-                <Container fluid className='formularios'>
-                    <Row>
+            <Col md={10} className='cabecalho'>
+                <h1>Crie aqui sua conta</h1>
+            </Col>
+            <Col md={10}>
+                <Form>
+
+                    <Row className="row-cols-lg-auto g-3 align-items-center">
                         <Col>
-                        </Col>
-                        <Col>
-                            <Form>
-                                <h1>Cadastro</h1>
-                                <Row className="row-cols-lg-auto g-3 align-items-center">
-                                    <Col>
-                                        <Label className="visually-hidden" for="Email">
-                                            Usuario
-                                        </Label>
-                                        <Input
-                                            id="newUsr"
-                                            name="newUsr"
-                                            placeholder="NickName"
-                                            type="text"
-                                        />
-                                        <Label
-                                            className="visually-hidden"
-                                            for="Password"
-                                        >
-                                            Password
-                                        </Label>
-                                        <Input
-                                            id="Password"
-                                            name="password"
-                                            placeholder="Sua senha aqui"
-                                            type="password"
-                                        />
-                                        <Button onClick={handleCadastro} >Cadastrar</Button>
-                                    </Col>
-                                    <Col>
-                                    </Col>
-                                </Row>
-                            </Form>
-                        </Col>
-                        <Col>
-                        </Col>
-                        <Col>
-                            <Form>
-                                <h1>Login</h1>
-                                <Row className="row-cols-lg-auto g-3 align-items-center">
-                                    <Col>
-                                        <Label className="visually-hidden" for="Email">
-                                            Usuario
-                                        </Label>
-                                        <Input
-                                            id="usrLogin"
-                                            name="usrLogin"
-                                            placeholder="NickName"
-                                            type="text"
-                                        />
-                                        <Label
-                                            className="visually-hidden"
-                                            for="Password"
-                                        >
-                                            Password
-                                        </Label>
-                                        <Input
-                                            id="Password"
-                                            name="password"
-                                            placeholder="Sua senha aqui"
-                                            type="password"
-                                        />
-                                        <Button onClick={handleLogin} >Logar</Button>
-                                    </Col>
-                                    <Col>
-                                    </Col>
-                                </Row>
-                            </Form>
+                            <Label className="visually-hidden" for="Email">
+                                Usuario
+                            </Label>
+                            <Input
+                                id="newUsr"
+                                name="newUsr"
+                                placeholder="NickName"
+                                type="text"
+                            />
+                            <Label
+                                className="visually-hidden"
+                                for="Password"
+                            >
+                                Password
+                            </Label>
+                            <Input
+                                id="Password"
+                                name="password"
+                                placeholder="Sua senha aqui"
+                                type="password"
+                            />
+                            <Button onClick={handleCadastro} >Criar conta</Button>
                         </Col>
                         <Col>
                         </Col>
                     </Row>
-                </Container>
-            </Row>
+                </Form>
+            </Col>
         </Container>
     );
 };

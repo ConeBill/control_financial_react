@@ -5,10 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import './style.css';
 
 const BoasVindas = () => {
-
     const navigate = useNavigate();
-    const handleCadastros = () => {
+
+    const handleCadastro = () => {
         navigate('/cadastros');
+    }
+
+    const handleLogin = () => {
+        navigate('/login');
     }
 
     return (
@@ -21,9 +25,9 @@ const BoasVindas = () => {
                     <div className="cadlog">
                         <AcessoRapido
                         className='acesso'
-                        onGerenciarDespesas={handleCadastros}
+                        onGerenciarDespesas={handleLogin}
                         onTextoBntOne={'Login'}
-                        onVerHistorico={handleCadastros}
+                        onVerHistorico={handleCadastro}
                         onTextoBntTwo={'Cadastro'}
                         />
                     </div>
@@ -31,7 +35,7 @@ const BoasVindas = () => {
             </Row>
             <Row className="row-centered">
                 <Col md="6" className="text-center">
-                    <h1>Bem-vindo ao seu site <br />de<br />Controle Financeiro</h1>
+                    <h1>Bem-vindo<br />ao seu site de<br />Controle Financeiro</h1>
                     <p>Faça login ou cadastre-se<br/>
                            para começar a gerenciar<br/>
                            suas despesas</p>
