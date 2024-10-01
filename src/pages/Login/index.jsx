@@ -1,64 +1,65 @@
 import { useState, useContext } from 'react';
-import { Container, Row, Col, Form, Label, Input, Button } from 'reactstrap';
+import { Container, Form, Label, Input, Button } from 'reactstrap';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './style.css';
 import api from '../../services/api';
 
 const Login = () => {
     const navigate = useNavigate();
-    const { user, setUser, aut, setAut } = useContext(AuthContext);
+    const { setUser, setAut } = useContext(AuthContext);
     const [usr, setUsr] = useState('');
     const [senhaUsr, setSenhaUsr] = useState('');
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleLogin();
+        }
+    };
 
     const handleLogin = async () => {
         try {
             const login = await api.login(usr, senhaUsr);
-            setUser(login.usr);
-            setAut(login.aut);
+            
+            if (login.status === 200) {
+                setUser(login.usr);
+                setAut(login.aut);
+                return navigate('/painel');
+            } else {
+                toast(login.msg);
+            }
         } catch (error) {
             console.log(error);
         }
-        
-            navigate('/painel');
     }
 
-    console.log(user);
     return (
-        <Container fluid>
-            <Form>
+        <Container className="login-container">
+            <Form className="login-form" onKeyDown={handleKeyDown}>
                 <h1>Login</h1>
-                <Row className="row-cols-lg-auto g-3 align-items-center">
-                    <Col>
-                        <Label className="visually-hidden" for="Email">
-                            Usuario
-                        </Label>
-                        <Input
-                            id="usrLogin"
-                            name="usrLogin"
-                            placeholder="NickName"
-                            type="text"
-                            onChange={(e) => setUsr(e.target.value)}
-                            value={usr}
-                        />
-                        <Label
-                            className="visually-hidden"
-                            for="Password"
-                        >
-                            Password
-                        </Label>
-                        <Input
-                            id="Password"
-                            name="password"
-                            placeholder="Sua senha aqui"
-                            type="password"
-                            onChange={(e) => setSenhaUsr(e.target.value)}
-                            value={senhaUsr}
-                        />
-                        <Button onClick={handleLogin} >Logar</Button>
-                    </Col>
-                </Row>
+                <Label for="usrLogin">Usuário</Label>
+                <Input
+                    id="usrLogin"
+                    name="usrLogin"
+                    placeholder="NickName"
+                    type="text"
+                    onChange={(e) => setUsr(e.target.value)}
+                    value={usr}
+                />
+                <Label for="Password">Senha</Label>
+                <Input
+                    id="Password"
+                    name="password"
+                    placeholder="Sua senha aqui"
+                    type="password"
+                    onChange={(e) => setSenhaUsr(e.target.value)}
+                    value={senhaUsr}
+                />
+                <Button color="primary" onClick={handleLogin}>Logar</Button>
             </Form>
+            <ToastContainer />
         </Container>
     );
 };

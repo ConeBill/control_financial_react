@@ -1,9 +1,8 @@
-const API_URL = 'http://147.79.107.23:3000';
-
 const api = {
     login: async (Usr, SenhaUsr) => {
+        const apiLoginUrl = import.meta.env.VITE_API_URL;
         try {
-            const response = await fetch(`${API_URL}/login`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -15,12 +14,12 @@ const api = {
             });
             return response.json();
         } catch (error) {
-            console.log(error);
+            return console.log(error);
         }
         
     },
     getDespesas: async () => {
-        const response = await fetch(`${API_URL}/despesas`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL_LOCAL}/despesas`);
         return response.json();
     },
     atualizarDespesa: async (nome, updates) => {
@@ -35,7 +34,7 @@ const api = {
     },
     adicionarDespesa: async (newDespesa) => {
         try {
-            const response = await fetch(`${API_URL}/despesas`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL_LOCAL}/despesas`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

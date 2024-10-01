@@ -21,24 +21,27 @@ const BoasVindas = () => {
                 <Col className="d-flex justify-content-center">
                     <img src="/img/Logo_Lua.png" alt="Logo" className="logo" />
                 </Col>
-                <Col className="d-flex container-boas-vindas align-items-center" sm={4}> 
+                <Col className="d-flex container-boas-vindas align-items-center" sm={4}>
                     <div className="cadlog">
                         <AcessoRapido
-                        className='acesso'
-                        onGerenciarDespesas={handleLogin}
-                        onTextoBntOne={'Login'}
-                        onVerHistorico={handleCadastro}
-                        onTextoBntTwo={'Cadastro'}
+                            className='acesso'
+                            onGerenciarDespesas={handleLogin}
+                            onTextoBntOne={'Login'}
+                            onVerHistorico={handleCadastro}
+                            onTextoBntTwo={'Cadastro'}
                         />
                     </div>
                 </Col>
             </Row>
             <Row className="row-centered">
-                <Col md="6" className="text-center">
-                    <h1>Bem-vindo<br />ao seu site de<br />Controle Financeiro</h1>
-                    <p>Faça login ou cadastre-se<br/>
-                           para começar a gerenciar<br/>
-                           suas despesas</p>
+                <Col md="6">
+                    <h1>Controle financeiro <br />
+                        pessoal com toda a <br />
+                        praticidade que a <br />
+                        planilha não te <br />
+                        oferece</h1>
+                    <p>Faça login ou cadastre-se<br />
+                        para começar a gerenciar suas despesas</p>
                 </Col>
             </Row>
         </Container>

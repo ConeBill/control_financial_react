@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import ComboBox from '../ComboBox';
+import { AuthContext } from '../../context/AuthContext';
+import api from '../../services/api'
 
 const ModalAdicionarDespesa = ({ isOpen, toggle, onSalvar }) => {
+  const { user } = useContext(AuthContext);
   const [nome, setNome] = useState('');
   const [valor, setValor] = useState('');
   const [valorPausado, setValorPausado] = useState('');
@@ -32,16 +35,20 @@ const ModalAdicionarDespesa = ({ isOpen, toggle, onSalvar }) => {
 
   const handleSalvar = () => {
     const novaDespesa = {
-      nome,
-      valor,
-      valorPausado,
-      status,
-      pago,
-      numeroParcelas,
-      diaVencimento
+      "Descr": nome,
+      "VlrTarifa": valor,
+      "Situacao": status,
+      "NroParcela": numeroParcelas,
+      "DtVencimento": diaVencimento,
+      "IdOrigem": user.IdUsr,
+      "SetorOrigem": "Usuarios",
     };
 
-    onSalvar(novaDespesa);
+    try {
+      api.adicionarDespesa(novaDespesa);
+    } catch (error) {
+      console.log("error:", error)
+    }
   };
 
   return (

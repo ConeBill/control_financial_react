@@ -1,3 +1,31 @@
-.formularios{
+/* Centraliza o form na tela */
+.login-container {
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
     align-items: center;
+    background-color: #f7f7f7; /* Cor de fundo suave */
+}
+
+.login-form {
+    background: white; /* Fundo branco para o formulário */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Leve sombra para destacar */
+    max-width: 400px;
+    width: 100%; /* Para dispositivos móveis */
+}
+
+.login-form h1 {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.login-form input {
+    margin-bottom: 1rem; /* Espaçamento entre os inputs */
+}
+
+.login-form button {
+    width: 100%; /* Botão ocupa toda a largura */
+    margin-top: 1rem;
 }

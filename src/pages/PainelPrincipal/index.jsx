@@ -17,8 +17,7 @@ const PainelPrincipal = () => {
     const totalGasto = 'R$ 1.521,44';
     const totalPausado = 'R$ 1.390,30';
     const totalAtrasado = 'R$ 300,00';
-    const notificacaoMensagem = 'Você tem 3 despesas atrasadas.';
-
+    
     // Funções que serão passadas para o componente AcessoRapido
     const handleGerenciarDespesas = () => {
         console.log('Redirecionando para Gerenciar Despesas...');
@@ -33,7 +32,7 @@ const PainelPrincipal = () => {
         <Container fluid className="home-container">
             <Row lx="12">
                 <Col md="5">
-                    <h1>Olá, {user.Usr}</h1>
+                    <h1>Olá, {user}</h1>
                 </Col>
                 <Col md="3"></Col>
                 <Col md="4" className='navHome'>
@@ -44,11 +43,6 @@ const PainelPrincipal = () => {
                         onTextoBntTwo={'Histórico de pagamentos'}
                     />
                 </Col>
-            </Row>
-            <Row>
-                <Notificacoes
-                    mensagem={notificacaoMensagem}
-                />
             </Row>
             <Row className='m-3 bg-light p-1 shadow-sm'>
                 <ResumoContas 
