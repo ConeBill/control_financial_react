@@ -1,0 +1,26 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo preto com transparência */
+    z-index: 9999; /* Para garantir que esteja acima de outros elementos */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Bloqueia cliques e interações */
+}
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: auto; /* Permite interação com o conteúdo do spinner */
+    color: white; /* Cor da mensagem de loading */
+}
+
+p {
+    margin-top: 10px;
+    font-size: 16px;
+}

@@ -1,3 +1,31 @@
-.formularios{
+/* Centraliza o form na tela */
+.cadastro-container {
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
     align-items: center;
+    background-color: #f7f7f7; /* Cor de fundo suave */
+}
+
+.cadastro-form {
+    background: white; /* Fundo branco para o formulário */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Leve sombra para destacar */
+    max-width: 400px;
+    width: 100%; /* Para dispositivos móveis */
+}
+
+.cadastro-form h1 {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.cadastro-form input {
+    margin-bottom: 1rem; /* Espaçamento entre os inputs */
+}
+
+.cadastro-form button {
+    width: 100%; /* Botão ocupa toda a largura */
+    margin-top: 1rem;
 }

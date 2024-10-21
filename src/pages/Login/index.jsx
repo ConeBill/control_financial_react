@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Container, Form, Label, Input, Button } from 'reactstrap';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,17 @@ const Login = () => {
     const [usr, setUsr] = useState('');
     const [senhaUsr, setSenhaUsr] = useState('');
 
+    useEffect(() => {
+        const storedUser = sessionStorage.getItem('user');
+        const storedToken = sessionStorage.getItem('token');
+
+        if (storedUser && storedToken) {
+            setUser(JSON.parse(storedUser));
+            setAut(storedToken);
+            navigate('/painel');
+        }
+    }, [navigate, setUser, setAut]);
+
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             handleLogin();
@@ -26,13 +37,16 @@ const Login = () => {
             if (login.status === 200) {
                 setUser(login.usr);
                 setAut(login.aut);
-                return navigate('/painel');
+
+                sessionStorage.setItem('user', JSON.stringify(login.usr));
+                sessionStorage.setItem('token', login.aut);
             } else {
                 toast(login.msg);
             }
         } catch (error) {
             console.log(error);
         }
+        return navigate('/painel');
     }
 
     return (
@@ -43,7 +57,7 @@ const Login = () => {
                 <Input
                     id="usrLogin"
                     name="usrLogin"
-                    placeholder="NickName"
+                    placeholder="Name"
                     type="text"
                     onChange={(e) => setUsr(e.target.value)}
                     value={usr}

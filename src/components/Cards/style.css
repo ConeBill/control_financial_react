@@ -1,0 +1,32 @@
+.account-card {
+    width: 200px;
+    height: 250px;
+    border: 1px solid #ccc;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    transition: transform 0.3s ease;
+  }
+  
+  .account-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .account-name {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .account-icon img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .account-details p {
+    margin: 5px 0;
+  }

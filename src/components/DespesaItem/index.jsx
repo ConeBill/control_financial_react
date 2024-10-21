@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Col, Row } from 'reactstrap';
 
 const DespesaItem = ({ despesa, onEditar, onPagar, onPausar }) => {
-  console.log(despesa)
   return (
     <Row className="despesa-row">
       <Col md='2' className="text-right">

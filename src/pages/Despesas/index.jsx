@@ -5,6 +5,7 @@ import DespesaItem from '../../components/DespesaItem';
 import ModalEditarDespesa from '../../components/ModalEditarDespesa';
 import ModalPagamentoDespesa from '../../components/ModalPagamentoDespesa';
 import ModalAdicionarDespesa from '../../components/ModalAdicionarDespesa';
+import ModalAdicionarReceita from '../../components/ModalAdicionarReceita';
 import './style.css';
 
 function Despesas() {
@@ -12,7 +13,9 @@ function Despesas() {
     const [modalEditar, setModalEditar] = useState(false);
     const [modalPagamento, setModalPagamento] = useState(false);
     const [modalAdicionar, setModalAdicionar] = useState(false);
+    const [modalAdicionarReceita, setModalAdicionarReceita] = useState(false);
     const [despesaSelecionada, setDespesaSelecionada] = useState({});
+    const [mostrarOpcoes, setMostrarOpcoes] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -34,6 +37,8 @@ function Despesas() {
 
     const toggleModalAdicionar = () => setModalAdicionar(!modalAdicionar);
 
+    const toggleModalAdicionarReceita = () => setModalAdicionarReceita(!modalAdicionarReceita); // Função para controlar o modal de receita
+
     const handleSalvarEdicao = (despesaAtualizada) => {
         setModalEditar(false);
     };
@@ -47,9 +52,7 @@ function Despesas() {
 
     const handleAdicionarDespesa = async (novaDespesa) => {
         try {
-            console.log(novaDespesa);
             const response = await api.adicionarDespesa(novaDespesa);
-    
             const data = response;
             console.log(data.msg);
             setModalAdicionar(false);
@@ -58,12 +61,22 @@ function Despesas() {
         }
     };
 
+    const handleAdicionarReceita = async (novaReceita) => {
+        try {
+            const response = await api.adicionarReceita(novaReceita);
+            const data = response;
+            console.log(data.msg);
+            setModalAdicionarReceita(false);
+        } catch (error) {
+            console.error('Erro ao adicionar receita:', error);
+        }
+    };
+
     return (
         <Container fluid>
             <Row className="my-4">
                 <Col className="text-center">
                     <h2>Gerenciamento de Despesas</h2>
-                    <Button color="primary" onClick={toggleModalAdicionar}>Adicionar Despesa</Button>
                 </Col>
             </Row>
             {despesas.map((despesa, index) => (
@@ -75,6 +88,21 @@ function Despesas() {
                     onPausar={handlePausarDespesa}
                 />
             ))}
+
+            {/* Botão flutuante */}
+            <div className="fab-container">
+                <button className="fab-button" onClick={() => setMostrarOpcoes(!mostrarOpcoes)}>
+                    +
+                </button>
+                {mostrarOpcoes && (
+                    <div className="fab-options">
+                        <Button color="success" onClick={toggleModalAdicionar}>Adicionar Despesa</Button>
+                        <Button color="info" onClick={toggleModalAdicionarReceita}>Adicionar Receita</Button>
+                    </div>
+                )}
+            </div>
+
+            {/* Modais */}
             <ModalEditarDespesa
                 isOpen={modalEditar}
                 toggle={() => toggleModalEditar({})}
@@ -91,6 +119,11 @@ function Despesas() {
                 isOpen={modalAdicionar}
                 toggle={toggleModalAdicionar}
                 onSalvar={handleAdicionarDespesa}
+            />
+            <ModalAdicionarReceita // Novo modal para adicionar receita
+                isOpen={modalAdicionarReceita}
+                toggle={toggleModalAdicionarReceita}
+                onSalvar={handleAdicionarReceita}
             />
         </Container>
     );

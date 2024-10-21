@@ -1,0 +1,39 @@
+.account-list-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .account-list {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .scroll-button {
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  
+  .scroll-button.left {
+    position: absolute;
+    left: 0;
+  }
+  
+  .scroll-button.right {
+    position: absolute;
+    right: 0;
+  }
+
+  .no-accounts-message {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin: 20px 0;
+  }
+  

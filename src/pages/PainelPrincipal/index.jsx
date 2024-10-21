@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ResumoDespesas from '../../components/ResumoDespesas';
 import AcessoRapido from '../../components/AcessoRapido';
 import Notificacoes from '../../components/Notificacoes';
@@ -7,17 +7,44 @@ import { Container, Row, Col } from 'reactstrap';
 import './style.css';
 import ResumoContas from '../../components/ResumoContas';
 import { AuthContext } from '../../context/AuthContext';
+import api from '../../services/api';
+import Carregando from '../../components/Carregando';
 
 const PainelPrincipal = () => {
     const navigate = useNavigate();
     const { user, setUser, aut, setAut } = useContext(AuthContext);
-    console.log(user)
+    const [contas, setContas] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const storedUser = sessionStorage.getItem('user');
+        const storedToken = sessionStorage.getItem('token');
+
+        if (storedUser && storedToken) {
+            setUser(JSON.parse(storedUser));
+            setAut(storedToken);
+        }
+        const fetchContas = async () => {
+            try {
+                const data = await api.getDespesasPagar();
+                setContas(data);
+            } catch (error) {
+                console.log("Error fetching accounts: ", error);
+            } finally {
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1500);
+            }
+        };
+
+        fetchContas();
+    }, [navigate, setUser, setAut]);
 
     // Dados para serem passados aos componentes temp 
     const totalGasto = 'R$ 1.521,44';
     const totalPausado = 'R$ 1.390,30';
     const totalAtrasado = 'R$ 300,00';
-    
+
     // Funções que serão passadas para o componente AcessoRapido
     const handleGerenciarDespesas = () => {
         console.log('Redirecionando para Gerenciar Despesas...');
@@ -30,6 +57,7 @@ const PainelPrincipal = () => {
 
     return (
         <Container fluid className="home-container">
+            <Carregando loading={loading} />
             <Row lx="12">
                 <Col md="5">
                     <h1>Olá, {user}</h1>
@@ -45,11 +73,7 @@ const PainelPrincipal = () => {
                 </Col>
             </Row>
             <Row className='m-3 bg-light p-1 shadow-sm'>
-                <ResumoContas 
-                    totalGasto={totalGasto}
-                    totalPausado={totalPausado}
-                    totalAtrasado={totalAtrasado}
-                />
+                <ResumoContas accounts={contas} />
             </Row>
             <Row className='m-3 bg-light p-1 shadow-sm'>
                 <ResumoDespesas
