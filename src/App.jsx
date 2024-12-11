@@ -6,16 +6,18 @@ import Despesas from './pages/Despesas';
 import Cadastros from './pages/Cadastros';
 import Login from './pages/Login';
 import Painel from './pages/PainelPrincipal';
+import Contas from './pages/Contas';
 
 function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/cadastros" element={<Cadastros />} />
-                <Route path="/despesas" element={<Despesas />} />
-                <Route path="/login" element={<Login />} />
+                <Route path='/' element={<Home />} />
+                <Route path='/cadastros' element={<Cadastros />} />
+                <Route path='/despesas' element={<Despesas />} />
+                <Route path='/login' element={<Login />} />
                 <Route path='/painel' element={<Painel />} />
+                <Route path='/contas' element={<Contas />} />
             </Routes>
         </Router>
     );

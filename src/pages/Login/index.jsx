@@ -9,20 +9,22 @@ import api from '../../services/api';
 
 const Login = () => {
     const navigate = useNavigate();
-    const { setUser, setAut } = useContext(AuthContext);
+    const { setUser, setAut, setIdUser } = useContext(AuthContext);
     const [usr, setUsr] = useState('');
     const [senhaUsr, setSenhaUsr] = useState('');
 
     useEffect(() => {
         const storedUser = sessionStorage.getItem('user');
+        const storedIdUser = sessionStorage.getItem('idUser');
         const storedToken = sessionStorage.getItem('token');
 
-        if (storedUser && storedToken) {
+        if (storedUser && storedToken && storedIdUser) {
             setUser(JSON.parse(storedUser));
             setAut(storedToken);
+            setIdUser(storedIdUser);
             navigate('/painel');
         }
-    }, [navigate, setUser, setAut]);
+    }, [navigate, setUser, setAut, setIdUser]);
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -37,8 +39,10 @@ const Login = () => {
             if (login.status === 200) {
                 setUser(login.usr);
                 setAut(login.aut);
+                setIdUser(login.idusr);
 
                 sessionStorage.setItem('user', JSON.stringify(login.usr));
+                sessionStorage.setItem('idUser', JSON.stringify(login.idusr));
                 sessionStorage.setItem('token', login.aut);
             } else {
                 toast(login.msg);

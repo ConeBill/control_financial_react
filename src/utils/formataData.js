@@ -1,9 +1,12 @@
-export const formataData = (dataIso) => {
+export const formataData = (dataIso, show) => {
     const data = new Date(dataIso);
     const dia = String(data.getDate()).padStart(2, '0');
     const mes = String(data.getMonth() + 1).padStart(2, '0');
     const ano = data.getFullYear();
-  
-    return `${dia}/${mes}/${ano}`;
+
+    if(show === true) {
+      return `${dia}/${mes}/${ano}`;
+    }
+    return `${ano}-${mes}-${dia}`;
   };
   

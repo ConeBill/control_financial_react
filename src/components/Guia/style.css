@@ -1,0 +1,26 @@
+.guia-container {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.guia-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.parcelas-list {
+    margin-top: 10px;
+    padding-left: 20px;
+    border-left: 2px solid #007bff;
+}
+
+.parcela-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}

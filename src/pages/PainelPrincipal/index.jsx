@@ -1,49 +1,55 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { Container, Row, Col } from 'reactstrap';
 import ResumoDespesas from '../../components/ResumoDespesas';
 import AcessoRapido from '../../components/AcessoRapido';
 import Notificacoes from '../../components/Notificacoes';
-import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col } from 'reactstrap';
-import './style.css';
 import ResumoContas from '../../components/ResumoContas';
-import { AuthContext } from '../../context/AuthContext';
-import api from '../../services/api';
 import Carregando from '../../components/Carregando';
+import BntFlut from '../../components/BntFlut';
+import api from '../../services/api';
+import './style.css';
 
 const PainelPrincipal = () => {
     const navigate = useNavigate();
-    const { user, setUser, aut, setAut } = useContext(AuthContext);
+    const { user, setUser, aut, setAut, idUser, setIdUser } = useContext(AuthContext);
     const [contas, setContas] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const storedUser = sessionStorage.getItem('user');
+        const storedIdUser = sessionStorage.getItem('idUser');
         const storedToken = sessionStorage.getItem('token');
 
-        if (storedUser && storedToken) {
+        if (storedUser && storedToken && storedIdUser) {
             setUser(JSON.parse(storedUser));
             setAut(storedToken);
+            setIdUser(storedIdUser);
         }
+    }, [setUser, setAut, setIdUser]);
+
+    useEffect(() => {
+        if (!idUser || !aut) return;  // Só executa quando idUser e aut estiverem prontos
+
         const fetchContas = async () => {
             try {
-                const data = await api.getDespesasPagar();
+                const data = await api.getDespesasPagar(idUser, aut);
                 setContas(data);
             } catch (error) {
                 console.log("Error fetching accounts: ", error);
             } finally {
-                setTimeout(() => {
-                    setLoading(false);
-                }, 1500);
+                setLoading(false);
             }
         };
 
         fetchContas();
-    }, [navigate, setUser, setAut]);
+    }, [idUser, aut]);
 
     // Dados para serem passados aos componentes temp 
-    const totalGasto = 'R$ 1.521,44';
-    const totalPausado = 'R$ 1.390,30';
-    const totalAtrasado = 'R$ 300,00';
+    const Gasto = 'R$ 1.521,44';
+    const Ganho = 'R$ 1.390,30';
+    const Atrasado = 'R$ 300,00';
 
     // Funções que serão passadas para o componente AcessoRapido
     const handleGerenciarDespesas = () => {
@@ -55,6 +61,15 @@ const PainelPrincipal = () => {
         console.log('Redirecionando para Ver Histórico...');
     };
 
+    const handlePerfil = () => {
+        console.log('Redirecionando para Ver seu perfil');
+    };
+
+    const handleContas = () => {
+        navigate('/contas');
+        console.log('Redirecionando para suas contas');
+    };
+
     return (
         <Container fluid className="home-container">
             <Carregando loading={loading} />
@@ -63,25 +78,28 @@ const PainelPrincipal = () => {
                     <h1>Olá, {user}</h1>
                 </Col>
                 <Col md="3"></Col>
-                <Col md="4" className='navHome'>
-                    <AcessoRapido
-                        onGerenciarDespesas={handleGerenciarDespesas}
-                        onTextoBntOne={'Gerenciar Guias'}
-                        onVerHistorico={handleVerHistorico}
-                        onTextoBntTwo={'Histórico de pagamentos'}
-                    />
-                </Col>
             </Row>
             <Row className='m-3 bg-light p-1 shadow-sm'>
                 <ResumoContas accounts={contas} />
             </Row>
             <Row className='m-3 bg-light p-1 shadow-sm'>
                 <ResumoDespesas
-                    totalGasto={totalGasto}
-                    totalPausado={totalPausado}
-                    totalAtrasado={totalAtrasado}
+                    Gasto={Gasto}
+                    Ganho={Ganho}
+                    Atrasado={Atrasado}
                 />
             </Row>
+            <BntFlut
+                mostrarOpcoes={false}
+                toggleModal1={handleContas}
+                toggleModal2={handlePerfil}
+                toggleModal3={handleVerHistorico}
+                toggleModal4={handleGerenciarDespesas}
+                texto1="Contas"
+                texto2="Perfil"
+                texto3="Verificar Histórico"
+                texto4="Gerenciar Movimentação"
+            />
         </Container>
     );
 };

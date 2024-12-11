@@ -1,9 +1,10 @@
 import React from 'react';
 import DespesaItem from '../DespesaItem';
+import { Col } from 'reactstrap';
 
 const DespesaList = ({ despesas, onPausar, onStatusUpdate }) => {
     return (
-        <div className="despesa-list">
+        <Col xs='2' className="despesa-list">
             {despesas.map((despesa, index) => (
                 <DespesaItem
                     key={index}
@@ -12,7 +13,7 @@ const DespesaList = ({ despesas, onPausar, onStatusUpdate }) => {
                     onStatusUpdate={onStatusUpdate}
                 />
             ))}
-        </div>
+        </Col>
     );
 };
 

@@ -42,65 +42,28 @@
     margin-left: 5px;
 }
 
-/* Estilo para o botão flutuante */
-.fab-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
+.guia-container {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.guia-header {
     display: flex;
-    flex-direction: column-reverse; /* Mantém o botão "+" embaixo */
-    align-items: flex-end; /* Alinha tudo à direita */
+    justify-content: space-between;
+    align-items: center;
 }
 
-.fab-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    font-size: 24px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-bottom: 10px;
+.parcelas-list {
+    margin-top: 10px;
+    padding-left: 20px;
 }
 
-.fab-options {
+.parcela-item {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end; /* Mantém as opções alinhadas à direita */
-}
-
-.fab-options button {
-    margin-bottom: 10px;
-    width: 150px;
-    opacity: 0;
-    transform: translateY(20px); /* Inicia abaixo do ponto final */
-    animation: slide-up 0.3s forwards ease-in-out;
-}
-
-/* Animação para os botões subirem */
-@keyframes slide-up {
-    to {
-        opacity: 1;
-        transform: translateY(0); /* Move para sua posição original */
-    }
-}
-
-/* Animação para os botões subirem */
-@keyframes slide-up {
-    to {
-        opacity: 1;
-        transform: translateY(0); /* Move para sua posição original */
-    }
-}
-
-/* Estilo para cada botão animar com delay */
-.fab-options button:nth-child(1) {
-    animation-delay: 0.1s;
-}
-
-.fab-options button:nth-child(2) {
-    animation-delay: 0.2s;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
 }

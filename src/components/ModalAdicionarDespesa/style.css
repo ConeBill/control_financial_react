@@ -1,0 +1,29 @@
+.lado {
+    display: flex;
+    justify-content: space-between;
+    gap: 20%; 
+    margin-bottom: 1rem;
+}
+
+.bloco {
+    flex: 1;
+    min-width: 40%;
+    max-width: 48%;
+}
+
+.check {
+    margin-bottom: 2%;
+}
+
+
+@media (max-width: 768px) {
+    .lado {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .bloco {
+        max-width: 100%;
+        min-width: 100%;
+    }
+}

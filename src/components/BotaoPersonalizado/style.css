@@ -1,14 +1,16 @@
 .botao-personalizado {
-    border: 1px solid rgba(59, 59, 59, 0.5);
-    padding: 5px 10px;
-    font-size: 8px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .botao-personalizado:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.botao-personalizado:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

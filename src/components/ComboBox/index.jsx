@@ -7,6 +7,7 @@ const ComboBox = ({ label, options, name, id, onChange }) => {
         <FormGroup>
             {label && <Label for={id}>{label}</Label>}
             <Input type="select" name={name} id={id} onChange={onChange}>
+                <option value="" disabled selected>Selecione</option>
                 {options.map((option, index) => (
                     <option key={index} value={option.value}>
                         {option.label}

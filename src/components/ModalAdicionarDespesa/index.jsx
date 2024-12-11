@@ -1,51 +1,37 @@
 import React, { useContext, useState } from 'react';
 import { Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import ComboBox from '../ComboBox';
 import { AuthContext } from '../../context/AuthContext';
-import api from '../../services/api'
+import './style.css';
 
 const ModalAdicionarDespesa = ({ isOpen, toggle, onSalvar }) => {
-  const { user } = useContext(AuthContext);
+  const { idUser } = useContext(AuthContext);
   const [nome, setNome] = useState('');
   const [valor, setValor] = useState('');
-  const [valorPausado, setValorPausado] = useState('');
-  const [status, setStatus] = useState('');
-  const [pago, setPago] = useState(false);
   const [numeroParcelas, setNumeroParcelas] = useState('');
   const [diaVencimento, setDiaVencimento] = useState('');
-  const [selectedOption, setSelectedOption] = useState('');
-
-  const handleChange = (e) => {
-    setStatus(e.target.value);
-  };
-
-  const optionsStatus = [
-    { value: '', label: 'Selecione' },
-    { value: 'Em dia', label: 'Em dia' },
-    { value: 'Atrasada', label: 'Atrasada' },
-    { value: 'Pausada', label: 'Pausada' },
-  ];
-
-  const optionsPago = [
-    { value: '', label: 'Selecione' },
-    { value: 'Sim', label: 'Sim' },
-    { value: 'Nao', label: 'Não' },
-  ];
-
+  const [isChecked, setIsChecked] = useState(false);
+  const [vlrJuros, setVlrJuros] = useState('');
 
   const handleSalvar = () => {
     const novaDespesa = {
       "Descr": nome,
-      "VlrTarifa": valor,
-      "Situacao": status,
+      "VlrTarifa": parseInt(valor),
+      "Situacao": "Ativa",
       "NroParcela": numeroParcelas,
       "DtVencimento": diaVencimento,
-      "IdOrigem": user.IdUsr,
+      "IdOrigem": idUser,
       "SetorOrigem": "Usuarios",
+      "VlrJuros": parseInt(vlrJuros)
     };
 
     try {
-      api.adicionarDespesa(novaDespesa);
+      onSalvar(novaDespesa);
+      setNome('');
+      setValor('');
+      setDiaVencimento('');
+      setIsChecked(false);
+      setNumeroParcelas('');
+      setVlrJuros('');
     } catch (error) {
       console.log("error:", error)
     }
@@ -65,7 +51,8 @@ const ModalAdicionarDespesa = ({ isOpen, toggle, onSalvar }) => {
               onChange={(e) => setNome(e.target.value)}
             />
           </FormGroup>
-          <FormGroup>
+          <div className='lado'>
+          <FormGroup className='bloco'>
             <Label for="valorDespesa">Valor</Label>
             <Input
               type="number"
@@ -74,25 +61,7 @@ const ModalAdicionarDespesa = ({ isOpen, toggle, onSalvar }) => {
               onChange={(e) => setValor(e.target.value)}
             />
           </FormGroup>
-          <FormGroup>
-            <ComboBox
-              label="Status"
-              options={optionsStatus}
-              name="statusDespesa"
-              id="statusDespesa"
-              onChange={handleChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="numeroParcelas">Número de Parcelas</Label>
-            <Input
-              type="number"
-              id="numeroParcelas"
-              value={numeroParcelas}
-              onChange={(e) => setNumeroParcelas(e.target.value)}
-            />
-          </FormGroup>
-          <FormGroup>
+          <FormGroup className='bloco'>
             <Label for="dataVencimento">Data de Vencimento</Label>
             <Input
               type="date"
@@ -101,6 +70,40 @@ const ModalAdicionarDespesa = ({ isOpen, toggle, onSalvar }) => {
               onChange={(e) => setDiaVencimento(e.target.value)}
             />
           </FormGroup>
+          </div>
+          <FormGroup className='check' check>
+            <Label check>
+              <Input
+                type="checkbox"
+                id="custom-switch"
+                checked={isChecked}
+                onChange={(e) => setIsChecked(e.target.checked)}
+              />
+              Tem mais de uma parcela
+            </Label>
+          </FormGroup>
+          {isChecked && (
+            <div className='lado'>
+              <FormGroup className='bloco'>
+                <Label for="numeroParcelas">Número de Parcelas</Label>
+                <Input
+                  type="number"
+                  id="numeroParcelas"
+                  value={numeroParcelas}
+                  onChange={(e) => setNumeroParcelas(e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup className='bloco'>
+                <Label for="jurosGuia">Juros da guia</Label>
+                <Input
+                  type="number"
+                  id="jurosGuia"
+                  value={vlrJuros}
+                  onChange={(e) => setVlrJuros(e.target.value)}
+                />
+              </FormGroup>
+            </div>
+          )}
           <Button color="primary" onClick={handleSalvar}>Salvar</Button>
         </Form>
       </ModalBody>

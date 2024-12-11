@@ -3,7 +3,6 @@ import './style.css';
 
 const Carregando = ({ loading, message = "Carregando..." }) => {
     if (!loading) return null;
-    console.log('rodou');
 
     return (
         <div className="overlay">

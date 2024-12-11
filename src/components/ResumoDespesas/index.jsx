@@ -1,20 +1,20 @@
 import React from 'react';
 
-const ResumoDespesas = ({ totalGasto, totalPausado, totalAtrasado }) => {
+const ResumoDespesas = ({ Gasto, Ganho, Atrasado }) => {
     return (
         <div className="resumo-despesas">
             <h2>Resumo do Mês</h2>
             <div className="resumo-item">
-                <span>Total Gasto:</span>
-                <strong>{totalGasto}</strong>
+                <span>Gasto:</span>
+                <strong>{Gasto}</strong>
             </div>
             <div className="resumo-item">
-                <span>Total Pausado:</span>
-                <strong>{totalPausado}</strong>
+                <span>Ganho:</span>
+                <strong>{Ganho}</strong>
             </div>
             <div className="resumo-item">
-                <span>Total Atrasado:</span>
-                <strong>{totalAtrasado}</strong>
+                <span>Atrasado:</span>
+                <strong>{Atrasado}</strong>
             </div>
         </div>
     );

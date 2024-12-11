@@ -1,11 +1,14 @@
-import AcessoRapido from '../../components/AcessoRapido';
+//Pacotinhos
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { Container, Row, Col, Form, Label, Input, Button } from 'reactstrap';
-import './style.css';
+import { Container, Form, Label, Input, Button } from 'reactstrap';
 import { toast, ToastContainer } from 'react-toastify';
-import api from '../../services/api';
+//Componentes Próprios
 import Carregando from '../../components/Carregando';
+//Serviços
+import api from '../../services/api';
+//Estilos
+import './style.css';
 
 const Cadastros = () => {
     const navigate = useNavigate();
@@ -20,7 +23,6 @@ const Cadastros = () => {
         setLoading(true);
         try {
             const response = await api.cadastro(usr, nomeUsr, senhaUsr, email);
-            console.log(response)
             
             if (response.status === 201) {
                 setLoading(false);

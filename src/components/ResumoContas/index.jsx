@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import Cards from '../Cards';
-import ModalDemonstraConta from '../ModalDemonstraConta';
+//import ModalDemonstraConta from '../ModalDemonstraConta';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRefresh } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
+import { Button } from 'reactstrap';
 
 const ResumoContas = ({ accounts = [] }) => {
   const [selectedAccount, setSelectedAccount] = useState(null);
@@ -25,7 +28,9 @@ const ResumoContas = ({ accounts = [] }) => {
   return (
     <div className="account-list-container">
       {accounts.length === 0 ? (
+        <>
         <p className="no-accounts-message">Nenhuma conta disponível no momento.</p>
+        </>
       ) : (
         <>
           <div className="account-list">
@@ -34,12 +39,12 @@ const ResumoContas = ({ accounts = [] }) => {
             ))}
           </div>
           {/* Verifica se uma conta foi selecionada para abrir o modal */}
-          <ModalDemonstraConta 
+          {/*<ModalDemonstraConta 
               isOpen={modalOpen}
               toggle={handleCloseModal}
               despesa={selectedAccount} 
               onSalvar={handleSalvarPagamento}
-            />
+            />*/}
         </>
       )}
     </div>

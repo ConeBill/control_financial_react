@@ -1,6 +1,6 @@
 .account-card {
-    width: 200px;
-    height: 250px;
+    width: 150px;
+    height: 200px;
     border: 1px solid #ccc;
     margin: 0 10px;
     display: flex;
@@ -19,7 +19,7 @@
   
   .account-name {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 12px;
   }
   
   .account-icon img {
@@ -29,4 +29,5 @@
   
   .account-details p {
     margin: 5px 0;
+    font-size: 12px;
   }
