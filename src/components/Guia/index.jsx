@@ -1,24 +1,27 @@
-import React, { useState, useEffect } from 'react';
+//Pacotinhos
+import { useState, useEffect } from 'react';
 import { Button } from 'reactstrap';
+
+//Componentes Próprios
+import Parcela from '../Parcela';
+
+//Estilo
 import './style.css';
 
 const Guia = ({ guia, onPagar }) => {
-    console.log('guia:', guia);
-    console.log('onPagar:', onPagar);
+    const [mostrarParcelas, setMostrarParcelas] = useState(false);
+    const [valorTotal, setValorTotal] = useState(0);
+
+    function somaParcelas(parcelas) {
+        if (!parcelas || parcelas.length === 0) return 0;
+        return parcelas.reduce((total, parcela) => {
+            return total + (parseFloat(parcela.VlrTarifa) || 0);
+        }, 0);
+    }
 
     useEffect(() => {
         setValorTotal(somaParcelas(guia.parcelas));
     }, [guia]);
-
-    const [mostrarParcelas, setMostrarParcelas] = useState(false);
-    const [valorTotal, setValorTotal] = useState(0);
-    function somaParcelas(parcelas) {
-        if (!parcelas || parcelas.length === 0) return 0; // Validação para evitar erros
-
-        return parcelas.reduce((total, parcela) => {
-            return total + (parseFloat(parcela.VlrTarifa) || 0); // Soma o VlrTarifa ou 0 se for indefinido
-        }, 0);
-    }
 
     const toggleParcelas = () => setMostrarParcelas((prev) => !prev);
 
@@ -30,14 +33,14 @@ const Guia = ({ guia, onPagar }) => {
                 <Button
                     color="info"
                     size="sm"
-                    onClick={toggleParcelas}>
+                    onClick={() => setMostrarParcelas(!mostrarParcelas)}>
                     {mostrarParcelas ? "Esconder Parcelas" : "Mostrar Parcelas"}
                 </Button>
                 {!mostrarParcelas && (
                     <Button
                         color="info"
                         size="sm"
-                    //onClick={toggleParcelas}
+                        onClick={toggleParcelas}
                     >
                         Editar Guia
                     </Button>
@@ -45,21 +48,24 @@ const Guia = ({ guia, onPagar }) => {
             </div>
 
             {mostrarParcelas && (
-                <div className="parcelas-list">
-                    {guia.parcelas.map((parcela) => (
-                        <div key={parcela.idParcela} className="parcela-item">
-                            <p>Valor: R$ {parcela.VlrTarifa}</p>
-                            <p>Situação: {parcela.Situacao}</p>
-                            <p>Vencimento: {new Date(parcela.DtVencimento).toLocaleDateString()}</p>
-                            <p>Nro Parcela: {parcela.NroParcela}</p>
-                            <Button
-                                color="success"
-                                size="sm"
-                                onClick={() => onPagar(parcela)}>
-                                Pagar
-                            </Button>
-                        </div>
-                    ))}
+                <div className="">
+                    {guia.parcelas && guia.parcelas.length > 0 ? (
+                        guia.parcelas.map((parcela) => (
+                            < div key={parcela.idParcela} className="parcela-item" >
+                                <p>Valor: R$ {parcela.VlrTarifa}</p>
+                                <p>Situação: {parcela.Situacao}</p>
+                                <p>Vencimento: {new Date(parcela.DtVencimento).toLocaleDateString()}</p>
+                                <p>Nro Parcela: {parcela.NroParcela}</p>
+                                <Button
+                                    color="success"
+                                    size="sm"
+                                    onClick={() => onPagar(guia)}>
+                                    Pagar
+                                </Button>
+                            </div>
+                        ))
+                    ) : (<p>Nenhuma parcela encontrada</p>)
+                    }
                 </div>
             )}
         </div>

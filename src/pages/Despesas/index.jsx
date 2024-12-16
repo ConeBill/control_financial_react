@@ -91,6 +91,8 @@ function Despesas() {
         navigate('/painel');
     };
 
+    console.log('despesas:', despesas);
+
     return (
         <Container fluid>
             <Row className="my-4">
