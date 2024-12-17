@@ -2,6 +2,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Container, Row, Col, Button } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 //Serviços
 import api from '../../services/api';
@@ -31,6 +32,7 @@ function Despesas() {
     
     const navigate = useNavigate();
 
+    //Buscando despesas
     useEffect(() => {
         async function fetchData() {
             const data = await api.getDespesas(idUser);
@@ -59,7 +61,7 @@ function Despesas() {
         try {
             const response = await api.adicionarReceita(novaReceita);
             const data = response;
-            console.log(data.msg);
+            toast.success('Nova receita adicionada com sucesso!');
             setModalAdicionarReceita(false);
         } catch (error) {
             console.error('Erro ao adicionar receita:', error);
@@ -75,8 +77,8 @@ function Despesas() {
         try {
             const response = await api.adicionarDespesa(novaDespesa);
             const data = response;
-            console.log(data.msg);
             setModalAdicionar(false);
+            return toast.success(data.msg);
         } catch (error) {
             console.error('Erro ao adicionar despesa:', error);
         }

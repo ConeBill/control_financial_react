@@ -93,8 +93,10 @@ function Contas() {
             setValor('');
             setConta([]);
             toggleModalAdicionarReceita();
+            return toast.success('Receita adicionada com sucesso!');
         } catch (error) {
-            console.log("error:", error)
+            console.log("error:", error);
+            return toast.error('Erro ao adicionar receita!');
         }
     };
 
@@ -143,12 +145,14 @@ function Contas() {
                 "Saldo": saldo,
             };
         }
-        console.log(novaConta);
+        console.log(novaConta)
         try {
             api.adicionarConta(novaConta);
             limpaConta();
+            return toast.success('Conta adicionada com sucesso!');
         } catch (error) {
             console.log("error:", error);
+            return toast.error('Erro ao adicionar conta!');
         }
     };
 
