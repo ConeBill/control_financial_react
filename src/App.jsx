@@ -7,6 +7,7 @@ import Cadastros from './pages/Cadastros';
 import Login from './pages/Login';
 import Painel from './pages/PainelPrincipal';
 import Contas from './pages/Contas';
+import Historico from './pages/Historicos';
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/painel' element={<Painel />} />
                 <Route path='/contas' element={<Contas />} />
+                <Route path='/historico' element={<Historico />} />
             </Routes>
         </Router>
     );

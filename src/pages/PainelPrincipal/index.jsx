@@ -53,12 +53,11 @@ const PainelPrincipal = () => {
 
     // Funções que serão passadas para o componente AcessoRapido
     const handleGerenciarDespesas = () => {
-        console.log('Redirecionando para Gerenciar Despesas...');
         navigate('/despesas');
     };
 
     const handleVerHistorico = () => {
-        console.log('Redirecionando para Ver Histórico...');
+        navigate('/historico');
     };
 
     const handlePerfil = () => {
@@ -67,7 +66,6 @@ const PainelPrincipal = () => {
 
     const handleContas = () => {
         navigate('/contas');
-        console.log('Redirecionando para suas contas');
     };
 
     return (
@@ -97,7 +95,7 @@ const PainelPrincipal = () => {
                 toggleModal4={handleGerenciarDespesas}
                 texto1="Contas"
                 texto2="Perfil"
-                texto3="Verificar Histórico"
+                texto3="Histórico"
                 texto4="Gerenciar Movimentação"
             />
         </Container>

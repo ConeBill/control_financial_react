@@ -1,12 +1,16 @@
 //Pacotinhos
 import { useState, useEffect } from 'react';
-import { Button } from 'reactstrap';
+import { Container, Row, Col, Button } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //Componentes Próprios
 import Parcela from '../Parcela';
 
 //Estilo
 import './style.css';
+import { faEye } from '@fortawesome/free-solid-svg-icons/faEye';
+import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons/faEyeSlash';
 
 const Guia = ({ guia, onPagar }) => {
     const [mostrarParcelas, setMostrarParcelas] = useState(false);
@@ -23,52 +27,47 @@ const Guia = ({ guia, onPagar }) => {
         setValorTotal(somaParcelas(guia.parcelas));
     }, [guia]);
 
-    const toggleParcelas = () => setMostrarParcelas((prev) => !prev);
+    const nomePagto = (idParcela, valor) => {
+        const nome = guia.Descr;
+        onPagar(nome, idParcela, valor);
+    };
+
+    console.log('guia:', guia.IdGuia);
 
     return (
-        <div className="guia-container">
-            <div className="guia-header">
-                <h4>{guia.Descr}</h4>
+        <Row key={guia.IdGuia} className="guia-container">
+            <Col xs="2" className="guia-header">
+                <h5>Id {guia.IdGuia}</h5>
+            </Col>
+            <Col xs="5" className="guia-header">
+                <h5>{guia.Descr}</h5>
+            </Col>
+            <Col xs="4" className="guia-header">
                 <p>Valor Total: R$ {valorTotal.toFixed(2)}</p>
+            </Col>
+            <Col xs="1" className="guia-header">
                 <Button
                     color="info"
                     size="sm"
                     onClick={() => setMostrarParcelas(!mostrarParcelas)}>
-                    {mostrarParcelas ? "Esconder Parcelas" : "Mostrar Parcelas"}
+                    {mostrarParcelas ? <FontAwesomeIcon icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
                 </Button>
-                {!mostrarParcelas && (
-                    <Button
-                        color="info"
-                        size="sm"
-                        onClick={toggleParcelas}
-                    >
-                        Editar Guia
-                    </Button>
-                )}
-            </div>
-
+                <Button color="info" size="sm">
+                    <FontAwesomeIcon icon={faEdit} />
+                </Button>
+            </Col>
             {mostrarParcelas && (
-                <div className="">
+                <Col className="">
                     {guia.parcelas && guia.parcelas.length > 0 ? (
-                        guia.parcelas.map((parcela) => (
-                            < div key={parcela.idParcela} className="parcela-item" >
-                                <p>Valor: R$ {parcela.VlrTarifa}</p>
-                                <p>Situação: {parcela.Situacao}</p>
-                                <p>Vencimento: {new Date(parcela.DtVencimento).toLocaleDateString()}</p>
-                                <p>Nro Parcela: {parcela.NroParcela}</p>
-                                <Button
-                                    color="success"
-                                    size="sm"
-                                    onClick={() => onPagar(guia)}>
-                                    Pagar
-                                </Button>
-                            </div>
-                        ))
+                        <Parcela
+                            parcelasGuia={guia.parcelas}
+                            nomePagto={nomePagto}
+                        />
                     ) : (<p>Nenhuma parcela encontrada</p>)
                     }
-                </div>
+                </Col>
             )}
-        </div>
+        </Row>
     );
 };
 

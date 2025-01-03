@@ -134,7 +134,32 @@ const api = {
             console.error('Erro ao fazer a requisição:', error);
             return;
         }
-    }
+    },
+    pagarDespesa: async (pagamento) => {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL_LOCAL}/movimentos/pagamento`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(pagamento),
+            });
+
+            return response.json();
+        } catch (error) {
+            console.error('Erro ao fazer a requisição:', error);
+            return;
+        }
+    },
+    pegaHistorico: async (idUser) => {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_URL_LOCAL}/movimentos/extrato?idUser=${idUser}`);
+            return response.json();
+            console.log( response);
+        } catch (error) {
+            console.log("Error => ", error);
+        }
+    },
 };
 
 export default api;

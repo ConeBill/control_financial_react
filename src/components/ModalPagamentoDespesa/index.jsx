@@ -1,6 +1,6 @@
 //Pacotinhos
 import { useState, useEffect, useContext } from 'react';
-import { Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Button, Col, Row } from 'reactstrap';
 import { toast } from 'react-toastify';
 
 //Componentes Próprios
@@ -12,7 +12,7 @@ import { AuthContext } from '../../context/AuthContext';
 //Serviços
 import api from '../../services/api';
 
-const ModalPagamentoDespesa = ({ isOpen, toggle, despesa, onSalvar }) => {
+const ModalPagamentoDespesa = ({ isOpen, toggle, despesa, onPagamento }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [dataPagamento, setDataPagamento] = useState('');
   const [valorPago, setValorPago] = useState('');
@@ -23,11 +23,8 @@ const ModalPagamentoDespesa = ({ isOpen, toggle, despesa, onSalvar }) => {
   //Pegar todas as contas do usuário
   useEffect(() => {
     async function fetchData() {
-      console.log('modal pagamento:');
-      console.log('idUser:', idUser);
       const response = await api.getContas(idUser);
       const formattedOptions = response.map(conta => {
-        console.log('conta:', conta);
         return {
           value: conta.IdConta,
           label: conta.nomeConta
@@ -38,19 +35,35 @@ const ModalPagamentoDespesa = ({ isOpen, toggle, despesa, onSalvar }) => {
     fetchData();
   }, [isChecked]);
 
-  console.log('optionsConta:', optionsConta);
+  const preToggle = () => {
+    setDataPagamento('');
+    setValorPago('');
+    setConta('');
+    setIsChecked(false);
+    toggle();
+  };
 
   const handleSalvar = () => {
-    console.log(conta);
-    //onSalvar({ id: despesa.id, dataPagamento, valorPago });
+    const pagamento = {
+      idParcela: despesa.idParcela,
+      dataPagamento,
+      valorPago,
+      conta,
+      idUser
+    };
+    onPagamento(pagamento);
+    preToggle();
   };
 
   return (
-    <Modal isOpen={isOpen} toggle={toggle}>
-      <ModalHeader toggle={toggle}>Pagamento de Despesa</ModalHeader>
+    <Modal isOpen={isOpen} toggle={preToggle}>
+      <ModalHeader toggle={preToggle}> Nome: {despesa.nome}</ModalHeader>
       <ModalBody>
         <Form>
-          <h5>Valor total: {despesa.valor}</h5>
+          <Row>
+          <Col><h5>Id: {despesa.idParcela}</h5></Col>
+          <Col><h5>Total: R$ {despesa.VlrTarifa}</h5></Col>
+          </Row>
           <FormGroup>
             <Label for="dataPagamento">Data de Pagamento</Label>
             <Input
@@ -83,11 +96,11 @@ const ModalPagamentoDespesa = ({ isOpen, toggle, despesa, onSalvar }) => {
           {isChecked && (
             <FormGroup>
               <ComboBox
-              label='Conta Bancária'
-              id='contaBancaria'
-              options={optionsConta}
-              name='contaBancaria'
-              onChange={(e) => setConta(e.target.value)}
+                label='Conta Bancária'
+                id='contaBancaria'
+                options={optionsConta}
+                name='contaBancaria'
+                onChange={(e) => setConta(e.target.value)}
               />
             </FormGroup>
           )}

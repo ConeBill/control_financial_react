@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './style.css';
-import { formataData } from '../../utils/formataData';
+import formataData from '../../utils/formataData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileContract } from '@fortawesome/free-solid-svg-icons';
 
